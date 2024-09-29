@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Vue-practice</title>
+</head>
+<body>
+
+    <div class="container" id="app">
+        <div class="card">
+            <h1>{{ title }}</h1>
+            <div class="form-control">
+                <input 
+                type="text" 
+                :placeholder="placeholderString"
+                v-model="inputValue"
+                @keypress.enter="addNewNote"
+                />
+            </div>
+            <button class="btn" @click="addNewNote" aria-label="Добавить заметку">Добавить заметку</button>
+            <hr />
+            <ul class="list" v-if="notes.length !== 0">
+                <li class="list-item" v-for="(note, index) in notes" :key="index">
+                    <span>{{ index + 1 }} | {{ note.toUpperCase() }}</span>
+                    <button class="btn danger" @click="removeNote(index)" aria-label="Удалить заметку">Удалить</button>
+                </li>
+                <hr />
+                <li>
+                    <strong>Общее количество заметок: {{ notes.length }}</strong>
+                </li>
+            </ul>
+            <div v-else>Список заметок пуст</div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@latest"></script>
+    <script src="./app.js"></script>
+</body>
+</html>
